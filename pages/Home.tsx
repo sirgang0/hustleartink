@@ -9,37 +9,51 @@ export const Home: React.FC = () => {
   return (
     <div className="bg-brand-dark min-h-screen">
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0">
+      <section className="relative h-screen flex items-center justify-center overflow-hidden bg-brand-dark">
+        {/* Mesh Gradient Layer */}
+        <div className="mesh-gradient mesh-animate"></div>
+        
+        {/* Background Image Overlay */}
+        <div className="absolute inset-0 z-0">
           <img 
             src="https://images.unsplash.com/photo-1590247813693-5541d1c609fd?auto=format&fit=crop&q=80&w=1920&h=1080&grayscale&blur=2" 
             alt="Tattoo Studio Background" 
-            className="w-full h-full object-cover opacity-20"
+            className="w-full h-full object-cover opacity-10"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/60 to-transparent"></div>
-          {/* Animated Glows */}
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-teal/20 rounded-full blur-[120px] animate-pulse"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-brand-orange/10 rounded-full blur-[120px] animate-pulse delay-1000"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-brand-dark/20 via-transparent to-brand-dark"></div>
         </div>
         
         <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
           <ScrollReveal direction="up">
-            <Logo className="w-48 md:w-64 mx-auto mb-8 drop-shadow-[0_0_30px_rgba(0,242,255,0.4)]" />
-            <h1 className="text-6xl md:text-9xl font-black text-white mb-6 tracking-tighter leading-none">
+            <div className="mb-12">
+              <Logo className="w-48 md:w-64 mx-auto mb-8 drop-shadow-[0_0_50px_rgba(0,242,255,0.6)] animate-pulse" />
+            </div>
+            
+            <h1 className="text-7xl md:text-[12rem] font-black text-white mb-8 tracking-tighter leading-none italic uppercase">
               HUSTLE <span className="text-brand-teal text-glow-blue">INK</span>
             </h1>
-            <p className="text-xl md:text-2xl text-zinc-400 mb-10 font-bold uppercase tracking-[0.4em]">
-              Art <span className="text-brand-purple">●</span> Culture <span className="text-brand-teal">●</span> Lifestyle
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-6">
-              <a href="#vision" className="px-12 py-5 bg-brand-teal text-brand-dark font-black rounded-full hover:bg-brand-purple transition-all shadow-xl shadow-brand-teal/20 uppercase tracking-widest">
-                Manifesto
-              </a>
-              <a href="#location" className="px-12 py-5 glass-card text-brand-teal font-black rounded-full hover:bg-white/5 transition-all uppercase tracking-widest">
-                Bize Ulaşın
+            
+            <div className="glass-card inline-block px-8 py-3 rounded-full mb-12 border-white/20">
+              <p className="text-lg md:text-xl text-zinc-300 font-black uppercase tracking-[0.5em]">
+                Premium <span className="text-brand-teal">Tattoo</span> Studio
+              </p>
+            </div>
+
+            <div className="flex flex-col sm:flex-row justify-center gap-8">
+              <Link to="/ai-generator" className="glass-cta px-16 py-6 text-brand-teal font-black rounded-full transition-all uppercase tracking-[0.2em] text-sm flex items-center gap-3 group">
+                <Zap size={20} className="group-hover:animate-bounce" />
+                AI Tasarımcıyı Başlat
+              </Link>
+              <a href="#location" className="px-16 py-6 glass-card text-white font-black rounded-full hover:bg-white/10 transition-all uppercase tracking-[0.2em] text-sm border-white/10">
+                Randevu Al
               </a>
             </div>
           </ScrollReveal>
+        </div>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 animate-bounce">
+          <div className="w-1 h-16 bg-gradient-to-b from-brand-teal to-transparent rounded-full opacity-50"></div>
         </div>
       </section>
 

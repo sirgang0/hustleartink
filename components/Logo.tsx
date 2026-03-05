@@ -21,10 +21,10 @@ export const Logo: React.FC<{ className?: string }> = ({ className = "h-12 w-aut
       {/* Stylized 'I' */}
       <path 
         d="M330 100V300M290 100H370M290 300H370" 
-        stroke="#ff9d00" 
+        stroke="#bc13fe" 
         strokeWidth="45" 
         strokeLinecap="round"
-        className="drop-shadow-[0_0_15px_rgba(255,157,0,0.3)]"
+        className="drop-shadow-[0_0_15px_rgba(188,19,254,0.3)]"
       />
       
       {/* Dynamic Exclamation Mark (!) */}
