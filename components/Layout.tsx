@@ -98,35 +98,41 @@ export const Navbar: React.FC = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-brand-dark/40 backdrop-blur-xl border-b border-white/10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
-          <div className="flex-shrink-0 flex items-center gap-2">
-            <Link to="/" className="flex items-center gap-3 group">
-              <Logo className="h-14 w-14 group-hover:rotate-12 transition-transform duration-300" />
-              <span className="text-xl font-black text-white tracking-[0.2em] group-hover:text-brand-teal transition-colors">
-                HUSTLE <span className="text-brand-purple text-glow-purple">INK</span>
-              </span>
+    <nav className="fixed top-0 left-0 w-full z-50 bg-brand-dark/60 backdrop-blur-2xl border-b border-white/5">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        <div className="flex items-center justify-between h-24">
+          <div className="flex-shrink-0 flex items-center">
+            <Link to="/" className="flex items-center gap-4 group">
+              <Logo className="h-12 w-12 group-hover:rotate-12 transition-transform duration-500" />
+              <div className="flex flex-col">
+                <span className="text-lg font-black text-white tracking-[0.3em] leading-none group-hover:text-brand-teal transition-colors">
+                  HUSTLE <span className="text-brand-purple text-glow-purple">INK</span>
+                </span>
+                <span className="text-[8px] font-bold text-zinc-500 tracking-[0.5em] uppercase mt-1">Master of Ink</span>
+              </div>
             </Link>
           </div>
           
-          <div className="hidden md:flex items-center gap-6">
-            <div className="flex items-baseline space-x-6">
+          <div className="hidden md:flex items-center gap-10">
+            <div className="flex items-center space-x-8">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`px-3 py-2 rounded-md text-xs font-black uppercase tracking-widest transition-all duration-300 ${
+                  className={`relative py-2 text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-300 ${
                     isActive(link.path)
-                      ? 'text-brand-teal bg-brand-teal/5'
-                      : 'text-zinc-400 hover:text-brand-teal hover:bg-brand-teal/5'
+                      ? 'text-brand-teal'
+                      : 'text-zinc-400 hover:text-white'
                   }`}
                 >
                   {link.name}
+                  {isActive(link.path) && (
+                    <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-brand-teal rounded-full shadow-[0_0_10px_rgba(0,242,255,0.5)]"></span>
+                  )}
                 </Link>
               ))}
             </div>
-            <div className="h-6 w-px bg-zinc-800"></div>
+            <div className="h-8 w-px bg-white/10"></div>
             <ProfileDropdown />
           </div>
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ScrollReveal } from '../components/Layout';
 import { Star, MapPin, ShieldCheck, Zap, Heart, Anchor, Palette, PenTool } from 'lucide-react';
 import { Logo } from '../components/Logo';
@@ -6,30 +6,66 @@ import { ARTISTS } from '../constants';
 import { Link } from 'react-router-dom';
 
 export const Home: React.FC = () => {
+  const [currentBg, setCurrentBg] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const backgrounds = [
+    '/background/arkaplan1.png',
+    '/background/arkaplan2.png',
+    '/background/arkaplan3.png'
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setCurrentBg((prev) => (prev + 1) % backgrounds.length);
+        setIsTransitioning(false);
+      }, 1000); // Transition duration
+    }, 6000); // Change image every 6 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="bg-brand-dark min-h-screen">
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden bg-brand-dark">
+        {/* Background Slideshow */}
+        <div className="absolute inset-0 z-0">
+          {backgrounds.map((bg, index) => (
+            <div
+              key={bg}
+              className={`absolute inset-0 transition-opacity duration-2000 ease-in-out ${
+                index === currentBg ? 'opacity-20' : 'opacity-0'
+              }`}
+            >
+              <img 
+                src={bg} 
+                alt={`Background ${index + 1}`} 
+                className="w-full h-full object-cover grayscale"
+              />
+            </div>
+          ))}
+          
+          {/* Transition Glow/Darken Overlay */}
+          <div className={`absolute inset-0 bg-brand-teal/5 transition-opacity duration-1000 pointer-events-none ${
+            isTransitioning ? 'opacity-100' : 'opacity-0'
+          }`}></div>
+          
+          <div className="absolute inset-0 bg-gradient-to-b from-brand-dark/40 via-transparent to-brand-dark"></div>
+        </div>
+
         {/* Mesh Gradient Layer */}
         <div className="mesh-gradient mesh-animate"></div>
         
-        {/* Background Image Overlay */}
-        <div className="absolute inset-0 z-0">
-          <img 
-            src="https://images.unsplash.com/photo-1590247813693-5541d1c609fd?auto=format&fit=crop&q=80&w=1920&h=1080&grayscale&blur=2" 
-            alt="Tattoo Studio Background" 
-            className="w-full h-full object-cover opacity-10"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-brand-dark/20 via-transparent to-brand-dark"></div>
-        </div>
-        
-        <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
+        <div className="relative z-10 text-center px-4 max-w-7xl mx-auto">
           <ScrollReveal direction="up">
-            <div className="mb-12">
-              <Logo className="w-48 md:w-64 mx-auto mb-8 drop-shadow-[0_0_50px_rgba(0,242,255,0.6)] animate-pulse" />
+            <div className="mb-16 relative inline-block">
+              <div className="absolute inset-0 bg-brand-teal/10 blur-[120px] rounded-full -z-10 animate-pulse"></div>
+              <Logo className="w-48 md:w-80 mx-auto mb-8 drop-shadow-[0_0_80px_rgba(0,242,255,0.5)]" />
             </div>
             
-            <h1 className="text-7xl md:text-[12rem] font-black text-white mb-8 tracking-tighter leading-none italic uppercase">
+            <h1 className="text-7xl md:text-[11vw] font-black text-white mb-12 tracking-tighter leading-none italic uppercase drop-shadow-2xl">
               HUSTLE <span className="text-brand-teal text-glow-blue">INK</span>
             </h1>
             
@@ -122,6 +158,40 @@ export const Home: React.FC = () => {
               </div>
             </div>
           </ScrollReveal>
+        </div>
+      </section>
+
+      {/* Techniques Section */}
+      <section className="py-32 px-4 md:px-8 max-w-7xl mx-auto">
+        <div className="text-center mb-24">
+          <ScrollReveal direction="up">
+            <h2 className="text-5xl md:text-7xl font-black text-white mb-6 uppercase tracking-tighter italic">Uygulama Teknikleri</h2>
+            <div className="h-1.5 w-32 bg-gradient-to-r from-brand-purple to-brand-teal mx-auto rounded-full"></div>
+          </ScrollReveal>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+          {[
+            { name: 'Blackwork', img: '/UygulamaTeknigi/blackwork.png' },
+            { name: 'Geometrik', img: '/UygulamaTeknigi/geometrik.png' },
+            { name: 'İnce Çizgi', img: '/UygulamaTeknigi/incecizgi.png' },
+            { name: 'Noktalama', img: '/UygulamaTeknigi/noktalama.png' },
+            { name: 'Suluboya', img: '/UygulamaTeknigi/suluboya.png' },
+            { name: 'Whipshade', img: '/UygulamaTeknigi/whipshade.png' },
+          ].map((tech, idx) => (
+            <ScrollReveal key={idx} direction="up" delay={idx * 100}>
+              <div className="group relative aspect-square rounded-2xl overflow-hidden glass-card hover:border-brand-teal/50 transition-all duration-500">
+                <img 
+                  src={tech.img} 
+                  alt={tech.name} 
+                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent flex items-end p-4">
+                  <span className="text-white font-black uppercase text-[10px] tracking-widest">{tech.name}</span>
+                </div>
+              </div>
+            </ScrollReveal>
+          ))}
         </div>
       </section>
 
