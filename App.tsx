@@ -1,5 +1,6 @@
 import React from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { Navbar, Footer } from './components/Layout';
 import { Home } from './pages/Home';
 import { Portfolio } from './pages/Portfolio';
@@ -24,6 +25,7 @@ const App: React.FC = () => {
           </main>
 
           <Footer />
+          <SpeedInsights />
         </div>
       </Router>
     </AuthProvider>
