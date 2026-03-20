@@ -1,5 +1,6 @@
 import React from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 import { Navbar, Footer } from './components/Layout';
 import { Home } from './pages/Home';
 import { Portfolio } from './pages/Portfolio';
@@ -25,6 +26,7 @@ const App: React.FC = () => {
 
           <Footer />
         </div>
+        <Analytics />
       </Router>
     </AuthProvider>
   );
